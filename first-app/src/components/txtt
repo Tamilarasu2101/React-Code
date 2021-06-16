@@ -1,0 +1,146 @@
+import React, { useState } from "react";
+import axios from "axios";
+
+const AddProduct = () => {
+  const [product, setProduct] = useState({
+    Code: null,
+    ProductlineID: null,
+    Name: "",
+    Scale: null,
+    Vendor: "",
+    PdtDescription: "",
+    QtyInStock: null,
+    BuyPrice: null,
+    MSRP: null,
+  });
+
+  const handleChange = (event) => {
+    const prod = {
+      Code: product.Code,
+      ProductlineID: product.ProductlineID,
+      Name: product.Name,
+      Scale: product.Scale,
+      Vendor: product.Vendor,
+      PdtDescription: product.PdtDescription,
+      QtyInStock: product.QtyInStock,
+      BuyPrice: product.BuyPrice,
+      MSRP: product.MSRP,
+    };
+    setProduct({
+      prod,
+      [event.target.name]: event.target.value,
+    });
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    // const axiosconfig = JSON.stringify({
+    //   headers: { "Content-Type": "application/json" },
+    // });
+    axios
+      .post("https://localhost:44371/api/Product", product)
+      .then(function (response) {
+        console.log(response.product);
+      });
+  };
+  return (
+    <>
+      <div className="container">
+        <div className="col-md-3 offset-md-4 mt-5 justify-content-center">
+          <h2>Add Product</h2>
+          <form onSubmit={handleSubmit}>
+            <input
+              type="text"
+              id="Code"
+              className="form-control mt-2"
+              name="Code"
+              placeholder="Code"
+              onChange={handleChange}
+              value={product.Code}
+            />
+            <input
+              type="text"
+              id="ProductlineId"
+              className="form-control mt-2"
+              name="ProductlineId"
+              placeholder="ProductlineId"
+              onChange={handleChange}
+              value={product.ProductlineId}
+            />
+            <input
+              type="text"
+              id="Name"
+              className="form-control mt-2"
+              name="Name"
+              placeholder="Name"
+              onChange={handleChange}
+              value={product.Name}
+            />
+            <input
+              type="text"
+              id="Scale"
+              className="form-control mt-2"
+              name="Scale"
+              placeholder="Scale"
+              onChange={handleChange}
+              value={product.Scale}
+            />
+            <input
+              type="text"
+              id="Vendor"
+              className="form-control mt-2"
+              name="Vendor"
+              placeholder="Vendor"
+              onChange={handleChange}
+              value={product.Vendor}
+            />
+            <input
+              type="text"
+              id="PdtDescription"
+              className="form-control mt-2"
+              name="PdtDescription"
+              placeholder="PdtDescription"
+              onChange={handleChange}
+              value={product.PdtDescription}
+            />
+            <input
+              type="text"
+              id="QtyInStock"
+              className="form-control mt-2"
+              name="QtyInStock"
+              placeholder="QtyInStock"
+              onChange={handleChange}
+              value={product.QtyInStock}
+            />
+            <input
+              type="text"
+              id="BuyPrice"
+              className="form-control mt-2"
+              name="BuyPrice"
+              placeholder="BuyPrice"
+              onChange={handleChange}
+              value={product.BuyPrice}
+            />
+            <input
+              type="text"
+              id="MSRP"
+              className="form-control mt-2"
+              name="MSRP"
+              placeholder="MSRP"
+              onChange={handleChange}
+              value={product.MSRP}
+            />
+            <input
+              type="submit"
+              value="Add"
+              className="btn btn-danger btn-block mt-2"
+              name="Add"
+            />
+          </form>
+        </div>
+      </div>
+    </>
+  );
+};
+
+export default AddProduct;
